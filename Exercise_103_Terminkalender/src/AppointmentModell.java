@@ -1,10 +1,10 @@
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.AbstractListModel;
@@ -55,6 +55,12 @@ public class AppointmentModell extends AbstractListModel {
     public void sort() {
         Collections.sort(appointments, new sortByDate());
 
+        updateList();
+    }
+
+    public void change(Appointment a, int idx) {
+        appointments.set(idx, a);
+        sort();
         updateList();
     }
 

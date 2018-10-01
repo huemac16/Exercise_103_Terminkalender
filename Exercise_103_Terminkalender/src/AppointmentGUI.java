@@ -113,6 +113,10 @@ public class AppointmentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jDeleteActionPerformed
 
     private void jChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeActionPerformed
+        AppointmentDlg dialog = new AppointmentDlg(this, true);
+        dialog.showCurrent((Appointment) bl.getElementAt(list.getSelectedIndex()));
+        dialog.setVisible(true);
+
 
     }//GEN-LAST:event_jChangeActionPerformed
 

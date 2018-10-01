@@ -17,6 +17,16 @@ public class AppointmentDlg extends javax.swing.JDialog {
         return status;
     }
 
+    public void showCurrent(Appointment a) {
+        tfJahr.setText("" + a.getDate().getYear());
+        tfMinute.setText("" + a.getDate().getMinute());
+        tfMonat.setText("" + a.getDate().getMonthValue());
+        tfStunde.setText("" + a.getDate().getHour());
+        tfTag.setText("" + a.getDate().getDayOfMonth());
+        tfText.setText(a.getText());
+
+    }
+
     public AppointmentDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
