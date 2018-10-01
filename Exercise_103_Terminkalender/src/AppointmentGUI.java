@@ -1,11 +1,28 @@
 
+import java.io.File;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class AppointmentGUI extends javax.swing.JFrame {
 
-    private AppointmentModell lm = new AppointmentModell();
+    private AppointmentModell bl = new AppointmentModell();
+    private File f = new File("./save.ser");
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy - hh:mm");
 
-    public AppointmentGUI() {
+    public static DateTimeFormatter getDtf() {
+        return dtf;
+    }
+
+    public AppointmentGUI() throws Exception {
         initComponents();
-        list.setModel(lm);
+        list.setModel(bl);
+
+        if (!(f.exists())) {
+            f.createNewFile();
+        }
+
+        bl.load(f);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,6 +67,11 @@ public class AppointmentGUI extends javax.swing.JFrame {
         jPopupMenu1.add(jMenu1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         list.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(list);
@@ -81,18 +103,26 @@ public class AppointmentGUI extends javax.swing.JFrame {
         dialog.setVisible(true);
 
         if (dialog.isStatus()) {
-            lm.add(dialog.getA());
+            bl.add(dialog.getA());
 
         }
     }//GEN-LAST:event_jAddActionPerformed
 
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
-        lm.delete(list.getSelectedIndex());
+        bl.delete(list.getSelectedIndex());
     }//GEN-LAST:event_jDeleteActionPerformed
 
     private void jChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeActionPerformed
 
     }//GEN-LAST:event_jChangeActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            bl.save(f);
+        } catch (Exception ex) {
+            Logger.getLogger(AppointmentGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -124,7 +154,11 @@ public class AppointmentGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppointmentGUI().setVisible(true);
+                try {
+                    new AppointmentGUI().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(AppointmentGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
