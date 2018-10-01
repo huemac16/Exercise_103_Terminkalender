@@ -1,8 +1,11 @@
 
 public class AppointmentGUI extends javax.swing.JFrame {
 
+    private AppointmentModell lm = new AppointmentModell();
+
     public AppointmentGUI() {
         initComponents();
+        list.setModel(lm);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,9 +32,19 @@ public class AppointmentGUI extends javax.swing.JFrame {
         jMenu1.add(jAdd);
 
         jDelete.setText("löschen");
+        jDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDeleteActionPerformed(evt);
+            }
+        });
         jMenu1.add(jDelete);
 
         jChange.setText("ändern");
+        jChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChangeActionPerformed(evt);
+            }
+        });
         jMenu1.add(jChange);
 
         jPopupMenu1.add(jMenu1);
@@ -66,7 +79,20 @@ public class AppointmentGUI extends javax.swing.JFrame {
     private void jAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddActionPerformed
         AppointmentDlg dialog = new AppointmentDlg(this, true);
         dialog.setVisible(true);
+
+        if (dialog.isStatus()) {
+            lm.add(dialog.getA());
+
+        }
     }//GEN-LAST:event_jAddActionPerformed
+
+    private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
+        lm.delete(list.getSelectedIndex());
+    }//GEN-LAST:event_jDeleteActionPerformed
+
+    private void jChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeActionPerformed
+
+    }//GEN-LAST:event_jChangeActionPerformed
 
     /**
      * @param args the command line arguments
