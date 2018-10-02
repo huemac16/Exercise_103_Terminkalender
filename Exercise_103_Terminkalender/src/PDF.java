@@ -19,9 +19,12 @@ public class PDF extends javax.swing.JDialog {
     private PDFPage page;
     private File outFile;
 
+    private ArrayList<Appointment> appointments;
+
     public PDF(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        appointments = AppointmentModell.getAppointments();
     }
 
     @SuppressWarnings("unchecked")
@@ -62,50 +65,33 @@ public class PDF extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPDFActionPerformed
+        outFile = fileChooser.getCurrentDirectory();
+        File pdf = new File(outFile.getAbsolutePath() + "\\Termine.pdf");
+        pdf.getParentFile().mkdirs();
+        try {
+            pdf.createNewFile();
+        } catch (IOException ex) {
+            Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        pdfDoc = new PDFDocument();
+        page = pdfDoc.createPage(null);
+        pdfDoc.addPage(page);
+        Graphics2D g2d = page.createGraphics();
+
+        g2d.setColor(Color.BLACK);
+
+        try {
+            pdfDoc.saveDocument(pdf.getAbsolutePath());
+        } catch (IOException ex) {
+            Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btPDFActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                PDF dialog = new PDF(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btPDF;

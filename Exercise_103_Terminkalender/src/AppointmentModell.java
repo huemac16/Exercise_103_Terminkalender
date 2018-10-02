@@ -11,7 +11,11 @@ import javax.swing.AbstractListModel;
 
 public class AppointmentModell extends AbstractListModel {
 
-    private ArrayList<Appointment> appointments = new ArrayList<>();
+    private static ArrayList<Appointment> appointments = new ArrayList<>();
+
+    public static ArrayList<Appointment> getAppointments() {
+        return appointments;
+    }
 
     public void add(Appointment a) {
         appointments.add(a);
