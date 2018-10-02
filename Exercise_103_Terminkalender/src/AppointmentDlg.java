@@ -176,6 +176,7 @@ public class AppointmentDlg extends javax.swing.JDialog {
         getContentPane().add(btAbbrechen, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btUebernehmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUebernehmenActionPerformed
