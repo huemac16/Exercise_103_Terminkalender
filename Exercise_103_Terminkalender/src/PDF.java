@@ -1,17 +1,14 @@
 
 import com.qoppa.pdfWriter.PDFDocument;
 import com.qoppa.pdfWriter.PDFPage;
-import com.sun.scenario.Settings;
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ListModel;
 
 public class PDF extends javax.swing.JDialog {
 
@@ -80,11 +77,31 @@ public class PDF extends javax.swing.JDialog {
         Graphics2D g2d = page.createGraphics();
 
         g2d.setColor(Color.BLACK);
+        int temp = 0;
 
-        try {
-            pdfDoc.saveDocument(pdf.getAbsolutePath());
-        } catch (IOException ex) {
-            Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
+        for (int i = 0; i < appointments.size(); i++) {
+            g2d.drawString(appointments.get(i).getText(), 20, 20 + temp);
+            g2d.drawString(appointments.get(i).getDate().format(AppointmentGUI.getDtf()), 20, 35 + temp);
+
+            temp += 50;
+
+        }
+
+        File file = new File(pdf.getAbsolutePath());
+        if (file.toString().endsWith(".pdf")) {
+            try {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
+            } catch (IOException ex) {
+                Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.open(file);
+                dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }//GEN-LAST:event_btPDFActionPerformed
