@@ -36,7 +36,6 @@ public class AppointmentGUI extends javax.swing.JFrame {
         jChange = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         list = new javax.swing.JList<>();
-        lbHeadline = new javax.swing.JLabel();
 
         jMenu1.setText("Termin");
 
@@ -73,27 +72,19 @@ public class AppointmentGUI extends javax.swing.JFrame {
             }
         });
 
+        list.setBorder(javax.swing.BorderFactory.createTitledBorder("Termine"));
         list.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(list);
-
-        lbHeadline.setText("Termine");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbHeadline, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(lbHeadline, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
         );
 
         pack();
@@ -187,7 +178,6 @@ public class AppointmentGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbHeadline;
     private javax.swing.JList<String> list;
     // End of variables declaration//GEN-END:variables
 }
