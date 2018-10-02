@@ -84,8 +84,9 @@ public class AppointmentGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lbHeadline, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,13 +110,25 @@ public class AppointmentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jAddActionPerformed
 
     private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
-        bl.delete(list.getSelectedIndex());
+        try {
+            bl.delete(list.getSelectedIndex());
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_jDeleteActionPerformed
 
     private void jChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChangeActionPerformed
-        AppointmentDlg dialog = new AppointmentDlg(this, true);
-        dialog.showCurrent((Appointment) bl.getElementAt(list.getSelectedIndex()));
-        dialog.setVisible(true);
+        try {
+            AppointmentDlg dialog = new AppointmentDlg(this, true);
+            dialog.showCurrent((Appointment) bl.getElementAt(list.getSelectedIndex()));
+            dialog.setVisible(true);
+
+            if (dialog.isStatus()) {
+                bl.change(dialog.getA(), list.getSelectedIndex());
+            }
+
+        } catch (Exception e) {
+        }
 
 
     }//GEN-LAST:event_jChangeActionPerformed
