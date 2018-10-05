@@ -87,6 +87,12 @@ public class PDF extends javax.swing.JDialog {
 
         }
 
+        try {
+            pdfDoc.saveDocument(pdf.getAbsolutePath());
+        } catch (IOException ex) {
+            Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         File file = new File(pdf.getAbsolutePath());
         if (file.toString().endsWith(".pdf")) {
             try {

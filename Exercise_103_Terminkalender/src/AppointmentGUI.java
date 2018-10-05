@@ -77,6 +77,7 @@ public class AppointmentGUI extends javax.swing.JFrame {
         list.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(list);
 
+        btPdf.setText("print to PDF");
         btPdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPdfActionPerformed(evt);
